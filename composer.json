@@ -1,0 +1,26 @@
+{
+  "name": "roman444uk/laravel-kit",
+  "description": "Laravel tools kit",
+  "type": "library",
+  "keywords": [
+    "laravel",
+    "framework"
+  ],
+  "license": "MIT",
+  "require": {
+    "php": "^8.1",
+    "laravel/framework": "^10.10"
+  },
+  "autoload": {
+    "psr-4": {
+      "LaravelKit\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Roman Gnidenko",
+      "email": "roman444uk@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev"
+}

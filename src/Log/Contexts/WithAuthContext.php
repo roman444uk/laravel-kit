@@ -11,7 +11,7 @@ class WithAuthContext
         $logger->withContext([
             'auth' => [
                 'user' => [
-                    'id' => auth()->user()->id,
+                    'id' => auth()?->user()?->id,
                 ],
                 'ip' => request()?->ip(),
             ]

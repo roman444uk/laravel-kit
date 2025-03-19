@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use LaravelKit\Helpers\LogHelper;
 use Symfony\Component\HttpFoundation\Response;
 
 class AssignRequestId
@@ -17,7 +18,7 @@ class AssignRequestId
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $requestId = (string) Str::uuid();
+        $requestId = LogHelper::generateRequestId();
 
         $context = [
             'request' => [

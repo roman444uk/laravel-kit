@@ -34,7 +34,7 @@ class FilebeatFormatter extends NormalizerFormatter
             $request = $record['context']['request'];
 
             if (isset($request['id'])) {
-                $request['source'] = LogHelper::getRequestBodyLogUrl($request['id']);
+                $request['source'] = LogHelper::getRequestUrl($request['id']);
             }
 
             $message['request'] = $request;
@@ -72,7 +72,7 @@ class FilebeatFormatter extends NormalizerFormatter
             $exception = (new FormatterContextException($record['context']['exception']))->format();
 
             $exceptionId = LogHelper::saveExceptionLog($exception);
-            $exception['exception']['source'] = LogHelper::getExceptionLogUrl($exceptionId);
+            $exception['exception']['source'] = LogHelper::getExceptionUrl($exceptionId);
 
             unset($exception['exception']['trace'], $exception['exception']['previous']);
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Data\Contracts;
+namespace LaravelKit\Data\Contracts;
 
 interface ScenarioData
 {

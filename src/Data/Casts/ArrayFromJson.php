@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Data\Casts;
+namespace LaravelKit\Data\Casts;
 
 use Illuminate\Database\Eloquent\Casts\Json;
 use Spatie\LaravelData\Casts\Cast;

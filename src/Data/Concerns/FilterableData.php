@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Data\Concerns;
+namespace LaravelKit\Data\Concerns;
 
 trait FilterableData
 {

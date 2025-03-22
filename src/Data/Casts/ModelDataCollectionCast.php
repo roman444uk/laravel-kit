@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Data\Casts;
+namespace LaravelKit\Data\Casts;
 
 use Illuminate\Support\Collection;
 use Spatie\LaravelData\Attributes\WithCast;

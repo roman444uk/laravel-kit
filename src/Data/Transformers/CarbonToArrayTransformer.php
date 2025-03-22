@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Data\Transformers;
+namespace LaravelKit\Data\Transformers;
 
 use App\Support\Utilities\DateTime;
 use Spatie\LaravelData\Support\Transformation\TransformationContext;

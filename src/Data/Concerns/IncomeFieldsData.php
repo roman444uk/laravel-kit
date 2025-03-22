@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Data\Concerns;
+namespace LaravelKit\Data\Concerns;
 
-use App\Support\Str;
+use LaravelKit\Support\Str;
 use Illuminate\Http\Request;
 
 trait IncomeFieldsData

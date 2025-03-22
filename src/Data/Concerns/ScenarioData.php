@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Data\Concerns;
+namespace LaravelKit\Data\Concerns;
 
 use Illuminate\Support\Collection;
 use ReflectionClass;

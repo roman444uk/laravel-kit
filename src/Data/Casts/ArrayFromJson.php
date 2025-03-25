@@ -14,6 +14,10 @@ class ArrayFromJson implements Cast
      */
     public function cast(DataProperty $property, mixed $value, array $properties, CreationContext $context, $class = null): array
     {
+        if (is_array($value)) {
+            return $value;
+        }
+
         return Json::decode($value);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace LaravelKit\Helpers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 
@@ -100,5 +102,20 @@ class LogHelper
         file_put_contents($filePath, json_encode($exception, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
         return $exceptionId;
+    }
+
+    public static function saveRequestLog(Request $request): void
+    {
+        $route = trim(str_replace(
+            Route::current()->getPrefix(), '', trim(\Illuminate\Support\Facades\Request::getRequestUri(), '/')
+        ), '/');
+
+        file_put_contents(
+            self::getRequestPath($request->requestId),
+            json_encode([
+                'route' => $route,
+                'body' => self::prepareData($request->all()),
+            ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
+        );
     }
 }

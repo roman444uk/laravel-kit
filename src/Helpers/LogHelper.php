@@ -111,7 +111,7 @@ class LogHelper
         }
 
         $route = trim(str_replace(
-            Route::current()->getPrefix(), '', trim(\Illuminate\Support\Facades\Request::getRequestUri(), '/')
+            Route::current()?->getPrefix(), '', trim(\Illuminate\Support\Facades\Request::getRequestUri(), '/')
         ), '/');
 
         file_put_contents(

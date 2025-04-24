@@ -104,8 +104,12 @@ class LogHelper
         return $exceptionId;
     }
 
-    public static function saveRequestLog(Request $request): void
+    public static function saveRequestLog(?Request $request): void
     {
+        if (!$request) {
+            return;
+        }
+
         $route = trim(str_replace(
             Route::current()->getPrefix(), '', trim(\Illuminate\Support\Facades\Request::getRequestUri(), '/')
         ), '/');

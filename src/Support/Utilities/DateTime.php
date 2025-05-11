@@ -30,13 +30,17 @@ class DateTime
     /**
      * Renders common datetime representation.
      */
-    public static function renderDateTime(string $dateTime = null, string $format = 'd.m.Y H:i'): ?string
+    public static function renderDateTime(Carbon|string $dateTime = null, string $format = 'd.m.Y H:i'): ?string
     {
         if (!$dateTime || mb_strlen($dateTime) < 19) {
             return null;
         }
 
-        return self::createFrom($dateTime)->setTimezone('Europe/Moscow')->format($format);
+        if (is_string($dateTime)) {
+            $dateTime = self::createFrom($dateTime);
+        }
+
+        return $dateTime->setTimezone('Europe/Moscow')->format($format);
     }
 
     /**

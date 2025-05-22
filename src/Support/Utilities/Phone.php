@@ -16,6 +16,8 @@ class Phone
 
     public static function toFormat(string $phone): string
     {
+        $phone = self::toRawFormat($phone);
+
         return '+7 (' . substr($phone, 0, 3) . ') ' . implode('-', [
                 substr($phone, 3, 3), substr($phone, 6, 2), substr($phone, 8, 2)
             ]);

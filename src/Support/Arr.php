@@ -102,4 +102,19 @@ class Arr extends \Illuminate\Support\Arr
 
         $array[array_shift($keys)] = $value;
     }
+
+    public static function keysToCamelCaseFromUnderscore(array $array): array
+    {
+        return self::renameKeys($array, fn ($key) => Str::toCamelCaseFromUnderscore($key));
+    }
+
+    public static function renameKeys(array $array, callable $callback): array
+    {
+        $newArray = [];
+        foreach ($array as $key => $value) {
+            $newArray[call_user_func($callback, $key)] = is_array($value) ? self::renameKeys($value, $callback) : $value;
+        }
+
+        return $newArray;
+    }
 }

@@ -55,6 +55,11 @@ class Str extends \Illuminate\Support\Str
         })->implode('');
     }
 
+    public static function toCamelCaseFromUnderscore(string $string): string
+    {
+        return self::tocamelCase($string, '_');
+    }
+
     public static function replaceUrlsWithLinks(string $string, array $options = [], callable $callback = null): string
     {
         $rexProtocol = '(https?://)?';

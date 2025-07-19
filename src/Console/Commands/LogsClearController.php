@@ -16,7 +16,7 @@ class LogsClearController extends Command
      *
      * @var string
      */
-    protected $signature = 'app:logs-clear {olderThan=90} {--all}';
+    protected $signature = 'app:logs-clear {olderThan=14} {--all}';
 
     /**
      * The console command description.

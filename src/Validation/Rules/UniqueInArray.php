@@ -75,7 +75,7 @@ class UniqueInArray implements DataAwareRule, ValidationRule
             ->where($this->column, $value);
 
         if ($this->ignoreColumn && !empty($currentRow[$this->ignoreColumn])) {
-            $query->whereNot($this->ignoreColumn, $currentRow[$this->ignoreColumn]);
+            $query->whereNot($this->table . '.' . $this->ignoreColumn, $currentRow[$this->ignoreColumn]);
         }
 
         if ($this->whereCallback) {

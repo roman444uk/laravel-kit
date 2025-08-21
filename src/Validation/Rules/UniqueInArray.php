@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelKit\Rules;
+namespace LaravelKit\Validation\Rules;
 
 use Closure;
 use Illuminate\Contracts\Validation\DataAwareRule;

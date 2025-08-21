@@ -19,6 +19,11 @@ class UniqueInArray implements DataAwareRule, ValidationRule
     protected mixed $ignoreColumn = null;
 
     /**
+     * Table of column that should be ignored while searching for duplicate values
+     */
+    protected mixed $ignoreTable = null;
+
+    /**
      * Callback defines whether field validation of current row  should be skipped
      */
     protected mixed $skipValidationIfCallback = null;
@@ -75,7 +80,7 @@ class UniqueInArray implements DataAwareRule, ValidationRule
             ->where($this->column, $value);
 
         if ($this->ignoreColumn && !empty($currentRow[$this->ignoreColumn])) {
-            $query->whereNot($this->table . '.' . $this->ignoreColumn, $currentRow[$this->ignoreColumn]);
+            $query->whereNot(($this->ignoreTable ?? $this->table) . '.' . $this->ignoreColumn, $currentRow[$this->ignoreColumn]);
         }
 
         if ($this->whereCallback) {
@@ -90,9 +95,10 @@ class UniqueInArray implements DataAwareRule, ValidationRule
 
     }
 
-    public function ignoreColumn(mixed $column): static
+    public function ignoreColumn(string $column, string $table = null): static
     {
         $this->ignoreColumn = $column;
+        $this->ignoreTable = $table;
 
         return $this;
     }

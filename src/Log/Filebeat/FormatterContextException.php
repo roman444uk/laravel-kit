@@ -6,6 +6,9 @@ class FormatterContextException implements FormatterContext
 {
     public function __construct(
         protected \Exception|\Error $exception,
+        protected array $logData = [],
+        protected string $event,
+        protected string $triggered,
     )
     {
     }

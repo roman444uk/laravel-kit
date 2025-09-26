@@ -38,7 +38,7 @@ if (!function_exists('getUser')) {
  * System controllers and services responses.
  */
 if (!function_exists('successJsonResponse')) {
-    function successJsonResponse(?string $message = '', array $data = [], int $httpCode = 200): JsonResponse
+    function successJsonResponse(array $data = [], ?string $message = '', int $httpCode = 200): JsonResponse
     {
         return response()->json([
             'success' => true,
@@ -50,7 +50,7 @@ if (!function_exists('successJsonResponse')) {
 }
 
 if (!function_exists('errorJsonResponse')) {
-    function errorJsonResponse(?string $message = '', array $errors = [], int $httpCode = 403): JsonResponse
+    function errorJsonResponse(array $errors = [], ?string $message = '', int $httpCode = 403): JsonResponse
     {
         return response()->json([
             'success' => false,

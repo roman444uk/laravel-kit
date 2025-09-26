@@ -1,5 +1,12 @@
 <?php
 
+use App\Classes\ServicesResponses\OperationResponse;
+use App\Models\Users\User;
+use Illuminate\Contracts\Routing\UrlGenerator;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Request;
+
 /**
  * System functions.
  */

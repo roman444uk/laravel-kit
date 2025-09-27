@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Request;
  * System functions.
  */
 if (!function_exists('envConfig')) {
-    function envConfig($key, $default = null)
+    function envConfig($key, ?string $default = null)
     {
         return env($key, $default ?? config('env.' . $key));
     }
@@ -28,7 +28,7 @@ if (!function_exists('urlModTime')) {
  * Auth and permissions.
  */
 if (!function_exists('can')) {
-    function can($abilities, $arguments = [], User $user = null): bool
+    function can($abilities, $arguments = [], ?User $user = null): bool
     {
         return getUser($user)->can($abilities, $arguments);
     }
@@ -76,7 +76,7 @@ if (!function_exists('successOperationResponse')) {
 }
 
 if (!function_exists('errorOperationResponse')) {
-    function errorOperationResponse(string $message = null, array $errors = [], array $data = [], ?int $httpCode = null): OperationResponse
+    function errorOperationResponse(?string $message = null, array $errors = [], array $data = [], ?int $httpCode = null): OperationResponse
     {
         return OperationResponse::error($message, $errors, $data, $httpCode);
     }

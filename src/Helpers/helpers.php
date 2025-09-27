@@ -35,7 +35,7 @@ if (!function_exists('can')) {
 }
 
 if (!function_exists('getUser')) {
-    function getUser(User $user = null): ?User
+    function getUser(?User $user = null): ?User
     {
         return $user ?: auth()->user();
     }

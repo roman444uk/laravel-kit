@@ -4,8 +4,10 @@ namespace LaravelKit\Services\Responses;
 
 class OperationResponseError extends OperationResponse
 {
-    public function __construct(string $message = null, array $errors = [], array $data = [])
+    public function __construct(
+        string $message = null, array $errors = [], array $data = [], ?int $httpCode = null
+    )
     {
-        parent::__construct(false, $data, $message, $errors);
+        parent::__construct(false, $data, $message, $errors, $httpCode);
     }
 }

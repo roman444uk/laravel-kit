@@ -8,10 +8,11 @@ use Illuminate\Support\Collection;
 abstract class OperationResponse implements OperationResponseInterface
 {
     public function __construct(
-        protected bool $success = true,
-        protected array $data = [],
+        protected bool    $success = true,
+        protected array   $data = [],
         protected ?string $message = null,
-        protected array $errors = []
+        protected array   $errors = [],
+        protected ?int    $httpCode = null,
     )
     {
     }
@@ -41,6 +42,11 @@ abstract class OperationResponse implements OperationResponseInterface
         return $this->errors;
     }
 
+    public function getHttpCode(): ?int
+    {
+        return $this->httpCode;
+    }
+
     public function pushData(mixed $value, string|int $key = null): self
     {
         if ($key === null) {
@@ -52,13 +58,15 @@ abstract class OperationResponse implements OperationResponseInterface
         return $this;
     }
 
-    public static function success(array $data = []): OperationResponseSuccess
+    public static function success(array $data = [], ?int $httpCode = null): OperationResponseSuccess
     {
-        return new OperationResponseSuccess($data);
+        return new OperationResponseSuccess($data, $httpCode);
     }
 
-    public static function error(string $message = null, array $errors = [], array $data = []): OperationResponseError
+    public static function error(
+        string $message = null, array $errors = [], array $data = [], ?int $httpCode = null
+    ): OperationResponseError
     {
-        return new OperationResponseError($message, $errors, $data);
+        return new OperationResponseError($message, $errors, $data, $httpCode);
     }
 }

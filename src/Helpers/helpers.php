@@ -1,6 +1,7 @@
 <?php
 
-use App\Classes\ServicesResponses\OperationResponse;
+use LaravelKit\Services\Responses\OperationResponse;
+use LaravelKit\Services\Responses\OperationResponseInterface;
 use App\Models\Users\User;
 use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Database\Eloquent\Model;
@@ -57,13 +58,13 @@ if (!function_exists('successJsonResponse')) {
 }
 
 if (!function_exists('errorJsonResponse')) {
-    function errorJsonResponse(array $errors = [], ?string $message = '', int $httpCode = 403): JsonResponse
+    function errorJsonResponse(?string $message = '', array $errors = [], array $data = [], int $httpCode = 403): JsonResponse
     {
         return response()->json([
             'success' => false,
             'message' => $message,
             'errors' => $errors,
-            'data' => [],
+            'data' => $data,
         ], $httpCode);
     }
 }
@@ -84,12 +85,15 @@ if (!function_exists('errorOperationResponse')) {
 
 if (!function_exists('operationJsonResponse')) {
     function operationJsonResponse(
-        OperationResponse $operationResponse, ?array $withData = [], array $extraData = []
+        OperationResponseInterface $operationResponse, ?array $withData = [], array $extraData = []
     ): JsonResponse
     {
         if (!$operationResponse->isSuccess()) {
             return errorJsonResponse(
-                $operationResponse->getMessage(), $operationResponse->getErrors(), $operationResponse->getHttpCode() ?? 403
+                $operationResponse->getMessage(),
+                $operationResponse->getErrors(),
+                $operationResponse->get(),
+                $operationResponse->getHttpCode() ?? 403
             );
         }
 
@@ -116,7 +120,7 @@ if (!function_exists('operationJsonResponse')) {
         });
 
         return successJsonResponse(
-            $operationResponse->getMessage(), array_merge($data, $extraData), $operationResponse->getHttpCode() ?? 200
+            array_merge($data, $extraData), $operationResponse->getMessage(), $operationResponse->getHttpCode() ?? 200
         );
     }
 }

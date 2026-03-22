@@ -114,12 +114,15 @@ class LogHelper
             Route::current()?->getPrefix(), '', trim(\Illuminate\Support\Facades\Request::getRequestUri(), '/')
         ), '/');
 
-        file_put_contents(
-            self::getRequestPath($request->requestId),
-            json_encode([
-                'route' => $route,
-                'body' => self::prepareData($request->all()),
-            ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
-        );
+        if (!file_exists($logFilePath = self::getRequestPath($request->requestId))) {
+            file_put_contents(
+                $logFilePath,
+                json_encode([
+                    'route' => $route,
+                    'body' => self::prepareData($request->all()),
+                ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
+            );
+            chmod($logFilePath, 0777);
+        }
     }
 }
